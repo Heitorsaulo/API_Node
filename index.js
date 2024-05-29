@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const Aluno = require('./models/aluno.model.js');
+const Usuario = require('./models/usuario.model.js');
 
 dotenv.config()
 
@@ -11,10 +11,10 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send("Hello from Node API");
 })
-app.post('/api/aluno', async (req, res) => {
+app.post('/api/usuario', async (req, res) => {
     try {
-        const aluno = await Aluno.create(req.body);
-        res.status(200).json(aluno)
+        const usuario = await Usuario.create(req.body);
+        res.status(200).json(usuario)
     } catch (error) {
         res.status(500).json({message: error.message});
     }

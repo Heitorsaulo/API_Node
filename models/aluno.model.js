@@ -1,29 +1,26 @@
+const { Int32 } = require('mongodb');
 const mongoose = require('mongoose');
 
-const AlunoSchema = mongoose.Schema(
+const UsuarioSchema = mongoose.Schema(
     {
+        cpf: {
+            type: Int32,
+            require: [true, "informe o cpf do usuario"]
+        },
+
         nome: {
             type: String,
-            require: [true, "informe o nome do aluno"]
+            require: [true, "informe o nome do usuario"]
         },
 
-        matricula: {
-            type: String,
-            require: [true, "informe a matricula do aluno"]
+        data_nascimento: {
+            type: { $dateToString: { format: "%m/%d/%Y", date: "$born" } }, 
+            require: [true, "informe a data de nascimento do usuario"]
         },
 
-        curso: {
-            type: String, 
-            require: [true, "informe o curso do alunio"]
-        },
-
-        ativo: {
-            type: Boolean,
-            require: [true, "Esse aluno está ativo na universidade"]
-        }
     }
 );
 
-const Aluno = mongoose.model("Aluno", AlunoSchema);
+const Usuario = mongoose.model("Usuario", UsuarioSchema);
 
-module.exports = Aluno;
+module.exports = Usuario;
