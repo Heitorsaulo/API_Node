@@ -1,0 +1,1 @@
+Projeto feito para ser uma API que tem uma função de CRUD, feito com nodeJs e expressJS.
