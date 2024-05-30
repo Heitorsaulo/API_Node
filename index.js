@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const Usuario = require('./models/usuario.model.js');
 
-dotenv.config()
+dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -11,6 +11,27 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send("Hello from Node API");
 })
+
+app.get('/api/usuarios', async (req, res) => {
+    try {
+        const usuarios = await Usuario.find({});
+        res.status(200).json(usuarios);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+});
+
+app.get('/api/usuario/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const usuario = await Usuario.findById(id);
+        res.status(200).json(usuario);
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+});
+
 app.post('/api/usuario', async (req, res) => {
     try {
         const usuario = await Usuario.create(req.body);

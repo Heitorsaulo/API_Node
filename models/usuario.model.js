@@ -1,10 +1,9 @@
-const { Int32 } = require('mongodb');
 const mongoose = require('mongoose');
 
 const UsuarioSchema = mongoose.Schema(
     {
         cpf: {
-            type: Int32,
+            type: Number,
             require: [true, "informe o cpf do usuario"]
         },
 
@@ -14,7 +13,7 @@ const UsuarioSchema = mongoose.Schema(
         },
 
         data_nascimento: {
-            type: { $dateToString: { format: "%m/%d/%Y", date: "$born" } }, 
+            type: Date, 
             require: [true, "informe a data de nascimento do usuario"]
         },
 
