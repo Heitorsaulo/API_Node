@@ -61,6 +61,22 @@ app.put('/api/usuario/:id', async (req,res) =>{
     }
 });
 
+app.delete('/api/usuario/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const usuario = await Usuario.findByIdAndDelete(id, req.body);
+
+        if(!usuario){
+            return res.status(404).json({message: "usuario não encontrado"});
+        }
+
+        res.status(200).json(usuario)
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+});
+
 const mongoDBPassword = process.env.MONGODB_PASSWORD;
 const mongoDBURL = `mongodb+srv://admin:${mongoDBPassword}@backendufs.zurrsbf.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackEndUFS`;
 
